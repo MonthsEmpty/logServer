@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.dimensoft.com" xmlns:tns="http://service.dimensoft.com"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="qualified"
+                    elementFormDefault="qualified" targetNamespace="http://service.dimensoft.com">
+            <xsd:element name="acceptLogs">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="1" minOccurs="1" name="xtid" nillable="true" type="xsd:string"/>
+                        <xsd:element maxOccurs="1" minOccurs="1" name="logsXml" nillable="true" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="acceptLogsResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element maxOccurs="1" minOccurs="1" name="out" nillable="true" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="acceptLogsResponse">
+        <wsdl:part name="parameters" element="tns:acceptLogsResponse">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="acceptLogsRequest">
+        <wsdl:part name="parameters" element="tns:acceptLogs">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="RzsjLogServicePortType">
+        <wsdl:operation name="acceptLogs">
+            <wsdl:input name="acceptLogsRequest" message="tns:acceptLogsRequest">
+            </wsdl:input>
+            <wsdl:output name="acceptLogsResponse" message="tns:acceptLogsResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="RzsjLogServiceHttpBinding" type="tns:RzsjLogServicePortType">
+        <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="acceptLogs">
+            <wsdlsoap:operation soapAction=""/>
+            <wsdl:input name="acceptLogsRequest">
+                <wsdlsoap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="acceptLogsResponse">
+                <wsdlsoap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="RzsjLogService">
+        <wsdl:port name="RzsjLogServiceHttpPort" binding="tns:RzsjLogServiceHttpBinding">
+            <wsdlsoap:address location="http://10.35.142.136:8180/psb/services/RzsjLogService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
